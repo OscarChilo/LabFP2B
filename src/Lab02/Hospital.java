@@ -43,7 +43,9 @@ public class Hospital {
 						case 1:System.out.println("** CREAR NUEVO PACIENTE **");
 						 //cientes.add(new ArrayList<Paciente>());
 					      do {
-					    	  pacientes.add(new Paciente());
+					    	  System.out.println("Ingrese nombre: ");
+					    	  String dni=scan.nextLine();
+					    	  pacientes.add(new Paciente(dni));
 						 		pacientes.get(0).setApellidos("Luis");
 						 		System.out.println(pacientes.get(0).getApellidos());
 						        nroMenu2 = scan.nextShort(); 
