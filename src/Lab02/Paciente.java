@@ -14,14 +14,8 @@ public class Paciente {
 	//Scanner scan=new Scanner(System.in);
 	
 
-	public Paciente(String dni, String nombres, String apellidos, LocalDate fechNac, String nroCel, String nroCelFam) {
-		super();
-		this.dni = dni;
-		this.nombres = nombres;
-		this.apellidos = apellidos;
-		this.fechNac = fechNac;
-		this.nroCel = nroCel;
-		this.nroCelFam = nroCelFam;
+	public Paciente() {
+	
 	}
 
 

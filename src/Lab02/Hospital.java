@@ -3,28 +3,23 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-//import java.Date.*;
+
 
 public class Hospital {
-	//private static String dni;
-
-	//public short nroMenu;
+	
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
 		short nroMenu1, nroMenu2;
-		//String edad;
+		
 		
 		Scanner scan=new Scanner (System.in);
-		//Paciente[]arr=new Paciente;
+	
 		ArrayList<Paciente> pacientes=new ArrayList<>();
 		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		//LocalDate fechaNacimiento = LocalDate.parse(, formato);
-		//Period edad = Period.between(fechaNacimiento, LocalDate.now());
-		Paciente pa01=new Paciente("73770864", "Carlos Jesus","Vega Loa",LocalDate.parse("26/09/1995",formato),"956412324","954215562");
-		Paciente pa02=new Paciente("73759744", "Maria","Rodriguez Garcia",LocalDate.parse("17/09/2000",formato),"952487555","965221485");
-		pacientes.add(pa01);
-		pacientes.add(pa02);
+	
+
+	
 		
 		System.out.println("** MENÚ **\r\n" +  
 				"1. PACIENTES\r\n" + 
@@ -48,25 +43,10 @@ public class Hospital {
 						case 1:System.out.println("** CREAR NUEVO PACIENTE **");
 						 //cientes.add(new ArrayList<Paciente>());
 					      do {
-					    	   System.out.println("Nuevo paciente");						    	   
-					    	   System.out.println("Ingresar DNI: ");
-					    	   String deni=scan.nextLine();
-					    	   String den2=scan.nextLine();
-					    	   System.out.println("Ingresar Nombres: ");
-					    	   String nombres=scan.nextLine();
-					    	   System.out.println("Ingresar Apellidos: ");
-					    	   String apellidos=scan.nextLine();
-					    	   System.out.println("Ingresar FechNacimiento ##/##/####: ");
-					    	   String fecNac=scan.nextLine();
-					    	   System.out.println("Ingresar NroCelular Personal: ");
-					    	   String nroCel=scan.nextLine();
-					    	   System.out.println("Ingresar NroCelular Familiar: ");
-					    	   String nroCelFam=scan.nextLine();
-						    	   for(int i=pacientes.size()+1;i<+1;i++) {
-						    		  pacientes.add(new Paciente(den2,null,null,null,null, null));
-						    	   }
-						    	   nroMenu2=scan.nextShort();
-						         
+					    	  pacientes.add(new Paciente());
+						 		pacientes.get(0).setApellidos("Luis");
+						 		System.out.println(pacientes.get(0).getApellidos());
+						        nroMenu2 = scan.nextShort(); 
 						       
 						       //for(int i=0;i<arr.length;i++) {
 					               }while(nroMenu2!=0);
