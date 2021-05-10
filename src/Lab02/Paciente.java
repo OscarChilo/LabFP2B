@@ -1,17 +1,32 @@
 package Lab02;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.*;
 
 public class Paciente {
-	private String dni;
-	private String nombres;
-	private String apellidos;
-	private Date fechNac;
-	private String nroCel;
-	private String nroCelFam;
+	String dni;
+	String nombres;
+	String apellidos;
+	LocalDate fechNac;
+	String nroCel;
+	String nroCelFam;	
+	Period edad;
+	//Scanner scan=new Scanner(System.in);
 	
-	
-	
+
+	public Paciente(String dni, String nombres, String apellidos, LocalDate fechNac, String nroCel, String nroCelFam) {
+		super();
+		this.dni = dni;
+		this.nombres = nombres;
+		this.apellidos = apellidos;
+		this.fechNac = fechNac;
+		this.nroCel = nroCel;
+		this.nroCelFam = nroCelFam;
+	}
+
+
 	public String getDni() {
+		//dni=scan.nextLine();
 		return dni;
 	}
 	
@@ -35,11 +50,11 @@ public class Paciente {
 		this.apellidos = apellidos;
 	}
 	
-	public Date getFechNac() {
+	public LocalDate getFechNac() {
 		return fechNac;
 	}
 	
-	public void setFechNac(Date fechNac) {
+	public void setFechNac(LocalDate fechNac) {
 		this.fechNac = fechNac;
 	}
 	
@@ -57,6 +72,17 @@ public class Paciente {
 	
 	public void setNroCelFam(String nroCelFam) {
 		this.nroCelFam = nroCelFam;
+	}
+
+
+	public Period getEdad() {
+		edad = Period.between(fechNac, LocalDate.now());
+		return edad;
+	}
+
+
+	public void setEdad(Period edad) {
+		this.edad = edad;
 	}
 	
 	
