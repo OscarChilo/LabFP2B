@@ -21,7 +21,7 @@ public class Hospital {
 		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		//LocalDate fechaNacimiento = LocalDate.parse(, formato);
 		//Period edad = Period.between(fechaNacimiento, LocalDate.now());
-		Paciente pa01=new Paciente("73770864", "Oscar Raul","Chilo Huillca",LocalDate.parse("26/09/1995",formato),"956412324","954215562");
+		Paciente pa01=new Paciente("73770864", "Carlos Jesus","Vega Loa",LocalDate.parse("26/09/1995",formato),"956412324","954215562");
 		Paciente pa02=new Paciente("73759744", "Maria","Rodriguez Garcia",LocalDate.parse("17/09/2000",formato),"952487555","965221485");
 		pacientes.add(pa01);
 		pacientes.add(pa02);
