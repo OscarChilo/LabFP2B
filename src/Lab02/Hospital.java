@@ -40,36 +40,123 @@ public class Hospital {
 					nroMenu2=scan.nextShort();
 					
 					switch(nroMenu2){
-						case 1:System.out.println("** CREAR NUEVO PACIENTE **");
-						 //cientes.add(new ArrayList<Paciente>());
-					      do {
-					    	  System.out.println("Ingrese nombre: ");
-					    	  String nombre=scan.nextLine();
-					    	  pacientes.add(new Paciente());
-						 		pacientes.get(0).setApellidos(nombre);
-						 		System.out.println(pacientes.get(0).getApellidos());
-						        nroMenu2 = scan.nextShort(); 
+					
+						case 1:
+							
+							do {
+							System.out.println("** CREAR NUEVO PACIENTE **");
+							
+							pacientes.add(new Paciente());
+							
+							System.out.println("NOMBRES: ");
+							pacientes.get(Paciente.codigo).setNombres(scan.nextLine());
+							
+							System.out.println("APELLIDOS: ");
+							pacientes.get(Paciente.codigo).setApellidos(scan.nextLine());
+							
+							System.out.println("DNI: ");
+							pacientes.get(Paciente.codigo).setDni(scan.nextLine());
+							
+								//System.out.println("FECHA DE NACIMIENTO: ");
+								//pacientes.get(Paciente.contador).setFechNac(scan.next());
+							
+							System.out.println("CELULAR: ");
+							pacientes.get(Paciente.codigo).setNombres(scan.nextLine());
+							
+							System.out.println("CELULAR DE ALGUN FAMILIAR: ");
+							pacientes.get(Paciente.codigo).setNombres(scan.nextLine());
+							
+							System.out.println("EDAD: ");
+							pacientes.get(Paciente.codigo).setNombres(scan.nextLine());
+							
+							pacientes.get(Paciente.codigo).setCodigoPaciente(Paciente.codigo);
+							System.out.println("¿Desea ingresar otro paciente? Si/No");
+							}
+							while(scan.nextLine().equalsIgnoreCase("si"));
+							Hospital.main(null);
+							break;
+							
+						case 2:
+							
+							System.out.println("** LISTA DE PACIENTES **");
+							System.out.println("DNI          Nombres y Apellidos     FechNacimiento  Edad  NroCelular    NroCelFamiliar    Codigo");
 						       
-						       //for(int i=0;i<arr.length;i++) {
-					               }while(nroMenu2!=0);
-					               Hospital.main (null);
-						break;
-						case 2:System.out.println("** LISTA DE PACIENTES **");
-						System.out.println("DNI          Nombres y Apellidos     FechNacimiento  Edad  NroCelular    NroCelFamiliar");
-						       do {
 							   for(int i=0;i<pacientes.size();i++) {
-									System.out.println(pacientes.get(i).getDni()+"    "+pacientes.get(i).getNombres()+" "+
-								    pacientes.get(i).getApellidos()+"   "+pacientes.get(i).getFechNac()+"   "+
-									Period.between(pacientes.get(i).getFechNac(), LocalDate.now()).getYears()+"   "+
-								    pacientes.get(i).getNroCel()+"   "+pacientes.get(i).nroCelFam);
+									System.out.println(pacientes.get(i));
 							   }
-							   nroMenu2=scan.nextShort();
-						       }while(nroMenu2!=0);
-						       Hospital.main (null);
-						break;
-						case 3:System.out.println("** ACTUALIZAR PACIENTE **");break;
-						case 4:System.out.println("** ELIMINAR PACIENTE **");break;
-						case 0:Hospital.main (null);break;
+							 
+							   break;
+						case 3:
+							System.out.println("** ACTUALIZAR PACIENTE **");
+							
+							do {
+								System.out.println("Ingrese el codigo del paciente ha actualizar");
+								int j = 0;
+								while(j < pacientes.size()) {
+									if(pacientes.get(j).getCodigoPaciente() == scan.nextInt() ) {
+									
+										System.out.println("NOMBRES: ");
+										pacientes.get(j).setNombres(scan.nextLine());
+									
+										System.out.println("APELLIDOS: ");
+										pacientes.get(j).setApellidos(scan.nextLine());
+									
+										System.out.println("DNI: ");
+										pacientes.get(j).setDni(scan.nextLine());
+									
+											//System.out.println("FECHA DE NACIMIENTO: ");
+											//pacientes.get(Paciente.contador).setFechNac(scan.next());
+									
+										System.out.println("CELULAR: ");
+										pacientes.get(j).setNombres(scan.nextLine());
+									
+										System.out.println("CELULAR DE ALGUN FAMILIAR: ");
+										pacientes.get(j).setNombres(scan.nextLine());
+									
+										System.out.println("EDAD: ");
+										pacientes.get(j).setNombres(scan.nextLine());
+									
+									
+										break;
+								
+										}
+								
+									}
+								
+								System.out.println("¿Desea actualizar otro paciente? Si/No");
+							
+							
+							} 	while(scan.nextLine().equalsIgnoreCase("si"));
+							
+							Hospital.main(null);
+							break;
+						case 4:
+							System.out.println("** ELIMINAR PACIENTE **");
+							do {
+							System.out.println("Ingrese el codigo del paciente a eliminar: ");
+							
+							int i = 0;
+							while(i < pacientes.size()) {
+								if(pacientes.get(i).getCodigoPaciente() == scan.nextInt() ) {
+									pacientes.remove(i);
+									System.out.println("Paciente removido con exito");
+									break;
+								} 
+									
+								if(i == pacientes.size()-1) 
+									System.out.println("No se encontro el paciente");
+									
+								i++;
+								
+							}
+							System.out.println("¿Desea eliminar otro paciente? Si/No");
+							}  while(scan.nextLine().equalsIgnoreCase("si"));
+							
+							Hospital.main(null);
+							break;
+						
+						case 0:
+							Hospital.main (null);break;
 					}
 		
 					break;
@@ -118,5 +205,7 @@ public class Hospital {
 		}
 
 	}
+	
+	
 
 }

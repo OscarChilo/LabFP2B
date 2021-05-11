@@ -4,23 +4,24 @@ import java.time.Period;
 import java.util.*;
 
 public class Paciente {
-	String dni;
-	String nombres;
-	String apellidos;
-	LocalDate fechNac;
-	String nroCel;
-	String nroCelFam;	
-	Period edad;
-	//Scanner scan=new Scanner(System.in);
+	private String dni;
+	private String nombres;
+	private String apellidos;
+	private LocalDate fechNac;
+	private String nroCel;
+	private String nroCelFam;	
+	private Period edad;
+	private int codigoPaciente;
+	public static int codigo = 0;
 	
 
 	public Paciente() {
-	
+		Paciente.codigo++;
 	}
 
 
 	public String getDni() {
-		//dni=scan.nextLine();
+		
 		return dni;
 	}
 	
@@ -77,6 +78,26 @@ public class Paciente {
 
 	public void setEdad(Period edad) {
 		this.edad = edad;
+	}
+	
+	
+
+	public int getCodigoPaciente() {
+		return codigoPaciente;
+	}
+
+
+	public void setCodigoPaciente(int codigoPaciente) {
+		this.codigoPaciente = codigoPaciente;
+	}
+
+
+	@Override
+	public String toString() {
+		return this.getDni()+"    "+this.getNombres()+" "+
+			    this.getApellidos()+"   "+this.getFechNac()+"   "+
+				Period.between(this.getFechNac(), LocalDate.now()).getYears()+"   "+
+			    this.getNroCel()+"   "+this.getNroCelFam()+"   "+Paciente.codigo;
 	}
 	
 	

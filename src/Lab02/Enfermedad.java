@@ -1,11 +1,12 @@
 package Lab02;
 
 public class Enfermedad {
-	String codEnfer;
-	String nombEnfer;
-	String tipoEnfer;
-	String sintomas;
-	String medicacion;
+	private String codEnfer;
+	private String nombEnfer;
+	private String tipoEnfer;
+	private String sintomas;
+	private String medicacion;
+	
 	public String getCodEnfer() {
 		return codEnfer;
 	}
