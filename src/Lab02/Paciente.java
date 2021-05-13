@@ -1,27 +1,29 @@
 package Lab02;
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class Paciente {
-	private String dni;
-	private String nombres;
-	private String apellidos;
-	private LocalDate fechNac;
-	private String nroCel;
-	private String nroCelFam;	
-	private Period edad;
-	private int codigoPaciente;
-	public static int codigo = 0;
+	String dni;
+	String dnib;
+	String nombres;
+	String apellidos;
+	LocalDate fechNac;
+	String nroCel;
+	String nroCelFam;	
+	int edad;
+		
+	//Scanner scan=new Scanner(System.in);
 	
 
-	public Paciente() {
-		Paciente.codigo++;
-	}
+	/*public Paciente(String string, String string2, String string3, LocalDate localDate, String string4, String string5) {
+	
+	}*/
 
 
 	public String getDni() {
-		
+		//dni=scan.nextLine();
 		return dni;
 	}
 	
@@ -70,35 +72,23 @@ public class Paciente {
 	}
 
 
-	public Period getEdad() {
-		edad = Period.between(fechNac, LocalDate.now());
+	public int getEdad() {
+		DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+		LocalDate hoy = LocalDate.now();
+		Period periodo=Period.between(fechNac, hoy);
+        edad = periodo.getYears();
 		return edad;
 	}
 
 
-	public void setEdad(Period edad) {
+	public void setEdad(int edad) {
 		this.edad = edad;
 	}
-	
-	
-
-	public int getCodigoPaciente() {
-		return codigoPaciente;
-	}
-
-
-	public void setCodigoPaciente(int codigoPaciente) {
-		this.codigoPaciente = codigoPaciente;
-	}
-
-
-	@Override
-	public String toString() {
-		return this.getDni()+"    "+this.getNombres()+" "+
-			    this.getApellidos()+"   "+this.getFechNac()+"   "+
-				Period.between(this.getFechNac(), LocalDate.now()).getYears()+"   "+
-			    this.getNroCel()+"   "+this.getNroCelFam()+"   "+Paciente.codigo;
-	}
+	/*public int buscarPaciente(String dni) {
+		
+		return index;
+		
+	}*/
 	
 	
 
