@@ -1,30 +1,41 @@
 package Lab02;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+
 
 public class Hospital {
+	static ArrayList<Caso> pacientes=new ArrayList<>();
+	static ArrayList<Caso> enfermedades=new ArrayList<>();
 	static ArrayList<Caso> casos=new ArrayList<>();
+	
 
-	public static void main(String[] args) throws FileNotFoundException {
+	public static void main(String[] args)  {
 		
 		short nroMenu1, nroMenu2;
-		String dni=null, codigoEnfermedad;
+		String dni=null;
 		String nombres = null;
 		String apellidos=null;
 		String fechNac=null;
 		String nroCel=null;
 		String nroCelFam=null;
+		String codEnfer=null;
+		String codCaso=null;
+		String observacion=null;
+		LocalDate fecha;
 		int cont=0;
 		int contEnfermedad = 0;
+		//int salida;
 		
 		Scanner scan=new Scanner (System.in);
 	
 		ArrayList<Paciente> pacientes=new ArrayList<>();
 		ArrayList<Enfermedad> enfermedades=new ArrayList<>();
+		ArrayList<Caso> casos=new ArrayList<>();
+		//ArrayList<Caso> casos=new ArrayList<>();
 		DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 		/*Paciente pa01=new Paciente("73770864", "Carlos Jesus","Vega Loa",LocalDate.parse("26/09/1995",formato),"956412324","954215562");
 		Paciente pa02=new Paciente("73759744", "Maria","Rodriguez Garcia",LocalDate.parse("17/09/2000",formato),"952487555","965221485");*/
@@ -68,8 +79,9 @@ public class Hospital {
 					    	  System.out.print("Ingrese FechNacimiento año####/mes##/dia##: ");
 					    	  pacientes.get(cont).setFechNac(LocalDate.parse(scan.next(),formato));
 					    	  System.out.print("Ingrese NroCelular: ");
-					    	  pacientes.get(cont).setNroCel(scan.nextLine());
 					    	  String nroCel2=scan.nextLine();
+					    	  pacientes.get(cont).setNroCel(scan.nextLine());
+					    	  //String nroCel2=scan.nextLine();
 					    	  System.out.print("Ingrese NroCelularFamliar: ");
 					    	  pacientes.get(cont).setNroCelFam(scan.nextLine());
 					    	  System.out.println("Seguir agregando pacientes? SI(cualquier numero)/NO(ingreae 0)");
@@ -82,7 +94,7 @@ public class Hospital {
 						case 2:System.out.println("** LISTA DE PACIENTES **");
 						System.out.println("DNI          Nombres y Apellidos     FechNacimiento  Edad  NroCelular    NroCelFamiliar");
 						       do {
-							   for(int i=0;i<pacientes.size()-1;i++) {
+							   for(int i=0;i<pacientes.size();i++) {
 									System.out.println(pacientes.get(i).getDni()+"    "+pacientes.get(i).getNombres()+" "+
 								    pacientes.get(i).getApellidos()+"   "+pacientes.get(i).getFechNac()+"   "+
 									//(int)Period.between(pacientes.get(i).getFechNac(), LocalDate.now()).getYears()
@@ -171,18 +183,18 @@ public class Hospital {
 									
 									System.out.println("* REGISTRAR ENFERMEDAD *");
 									
-									System.out.print("CODIGO: ");
-									String cod1=scan.nextLine();//control error
+									System.out.print("Ingrese Codigo: ");
+									String codErr=scan.nextLine();//control error
 									enfermedades.get(contEnfermedad).setCodEnfer(scan.nextLine());
 									
-									System.out.print("NOMBRE DE LA ENFERMEDAD: ");
+									System.out.print("Ingrese nombre de Enfermedad: ");
 									enfermedades.get(contEnfermedad).setNombEnfer(scan.nextLine());
 									
-									System.out.print("SINTOMAS: ");
+									System.out.print("Igrese sintomas: ");
 									//String cod2=scan.nextLine();//controlde error
 									enfermedades.get(contEnfermedad).setSintomas(scan.nextLine());
 									
-									System.out.print("MEDICACION: ");
+									System.out.print("Ingrese medicacion: ");
 									enfermedades.get(contEnfermedad).setMedicacion(scan.nextLine());
 								
 									System.out.print("\"Seguir agregando enfermedades? SI(cualquier numero)/NO(ingreae 0)\" ");
@@ -217,7 +229,7 @@ public class Hospital {
 								    //System.out.println("* ACTUALIZAR DATOS DE UNA ENFERMEDAD *");
 									
 									do {
-										System.out.print("Ingrese DNI: ");
+										System.out.print("Ingrese codigo de enfermedad a buscar: ");
 										String codErr=scan.nextLine();
 										String codEnf=scan.nextLine();
 										int index=0;
@@ -266,7 +278,7 @@ public class Hospital {
 											i++;
 											
 										//}
-										System.out.println("¿Desea eliminar otra enfermedad? (Si/No)");
+										System.out.println("¿Desea eliminar otro paciente? (Si/No)");
 										}  while(scan.nextLine().equalsIgnoreCase("si"));
 								    break;
 							//case 0:Hospital.main (null);break;
@@ -275,126 +287,125 @@ public class Hospital {
 						
 					break;
 			case 3:
+				do {
 					System.out.println("** CASOS **\r\n" + 
-					"1. Registrar un caso\r\n" + 
-					"2. Ver casoa\r\n" + 
-					"3. Actualizar un caso\r\n" + 
-					"4. Eliminar un caso\r\n" + 
-					"5. Regresar menu principal:0");
-					nroMenu2=scan.nextShort();
-					
-					switch(nroMenu2){
-						case 1:System.out.println("** REGISTRAR UN CASO **");
-						do {
-							System.out.println("Ingrese DNI del paciente");
-							dni = scan.nextLine();
-							for(Paciente i: pacientes) {
-								if(i.getDni() == dni) {
-									System.out.println("");
-									System.out.println("Ingrese codigo de la enfermedad");
-									codigoEnfermedad = scan.nextLine();
-									for(Enfermedad j: enfermedades) {
-										if(j.getCodEnfer() == codigoEnfermedad) {
-											casos.add(new Caso(i.toString() +"\n" + j.toString(),"Observaciones:" + scan.nextLine()));
-											System.out.println("Caso añadido con exito");
-										}
-									}
-								} else {
-									System.out.println("El código de paciente no existe");
-								}
-							}
-							System.out.println("¿Desea añadir otro caso? (Si/No)");
-						} while(scan.nextLine().equalsIgnoreCase("si"));	
-						break;
-						
-						case 2:System.out.println("** LISTA DE CASOS **");
-						for(Caso i : casos) {
-							System.out.println(i.toString());
-						}
-						break;
-						
-						case 3:System.out.println("** ACTUALIZAR DATOS DE UN CASO **");
-						do {
-							System.out.println("Ingrese DNI del paciente");
-							dni = scan.nextLine();
-							for(Paciente i: pacientes) {
-								if(i.getDni() == dni) {
-									System.out.println("");
-									System.out.println("Ingrese codigo de la enfermedad");
-									codigoEnfermedad = scan.nextLine();
-									for(Enfermedad j: enfermedades) {
-										if(j.getCodEnfer() == codigoEnfermedad) {
-											casos.add(new Caso(i.toString() +"\n" + j.toString(),"Observaciones:" + scan.nextLine()));
-											System.out.println("Caso actualizado con exito");
-										}
-									}
-								} else {
-									System.out.println("El código de paciente no existe");
-								}
-							}
-							System.out.println("¿Desea actualizar otro caso? (Si/No)");
-						} while(scan.nextLine().equalsIgnoreCase("si"));
-						break;
-						
-						case 4:System.out.println("** ELIMINAR UN CASO **");
-						do {
-							System.out.println("Ingrese DNI del paciente");
-							dni = scan.nextLine();
-							for(Paciente i: pacientes) {
-								if(i.getDni() == dni) {
-									System.out.println("");
-									System.out.println("Ingrese codigo de la enfermedad");
-									codigoEnfermedad = scan.nextLine();
-									for(int j = 0; j < enfermedades.size(); j++) {
-										if(enfermedades.get(j).getCodEnfer() == codigoEnfermedad) {
-											casos.remove(j);
-											System.out.println("Caso removido exitosamente");
-										}
-									}
+							"1. Registrar un caso\r\n" + 
+							"2. Ver casoa\r\n" + 
+							"3. Actualizar un caso\r\n" + 
+							"4. Eliminar un caso\r\n" + 
+							"5. Regresar menu principal:0");
+							nroMenu2=scan.nextShort();
+							
+							switch(nroMenu2){
+								case 1:
+									System.out.println("** REGISTRAR UN CASO **");
+										do {
+											System.out.print("Digite el codigo del paciente: ");
+											String codErr=scan.nextLine();
+											String dni2=scan.nextLine();
+											int index=0;
+											int nroLista=pacientes.size();
+											for(int pacientId=0;pacientId<nroLista;pacientId++) {
+												if(pacientes.get(pacientId).dni.equals(dni2)) {	
+													index=pacientId;
+													
+													//casos.get(pacientId).setDnic(dni2);
+													System.out.print("Ingrese codigo de enfermedad: ");
+													
+													index=0;
+												    nroLista=enfermedades.size();
+												    //codErr=scan.nextLine();
+													String codEnf=scan.nextLine();
+													for(int enfId=0;enfId<nroLista;enfId++) {
+														if(enfermedades.get(enfId).codEnfer.equals(codEnf)) {
+															//casos.get(pacientId).getNomEnf();
+															System.out.println("Ingrese observaciones (si las tiene):");
+															casos.get(pacientId).setObservacion(observacion);
+															fecha=LocalDate.now();
+															casos.get(pacientId).setFecha(fecha);
+															codCaso=(dni2+String.valueOf(pacientes.get(pacientId)));
+															casos.get(pacientId).setCodCaso(codCaso);
+															break;
+														}else {
+															System.out.println("No existe el codigo de enfermedad.");
+														}
+													}
+												}else{
+													System.out.println("No existe el codigo de paciente.");
+												}
+											}
+											
+											System.out.println("Seguir ingresando? SI(cualquier numero)/NO(ingreae 0)");
+											nroMenu2=scan.nextShort();
+										}while(nroMenu2!=0);
+									break;
 									
-								} else {
-									System.out.println("El código de paciente no existe");
-								}
-							}
-							System.out.println("¿Desea actualizar otro caso? (Si/No)");
-						}while(scan.nextLine().equalsIgnoreCase("si"));
-						break;
-						
-						case 0:
-						case 5:
-							Hospital.main (null)
-						;break;
-			        }
-		
-			case 4:
-					System.out.println("** REPORTE FINAL **");
-					producir();
-					break;
+								case 2:
+									System.out.println("** LISTA DE CASOS **");
+										do {
+											
+											for(int i=0;i<casos.size();i++) {
+												
+												System.out.println(casos.get(i).getCodCaso()+"     "+casos.get(i).getDnic()+"     "+casos.get(i).getFecha()+"     "+casos.get(i).getObservacion());
+											}
+											nroMenu2=scan.nextShort();
+										}while(nroMenu2!=0);
+									break;
+									
+								case 3:
+									System.out.println("** ACTUALIZAR DATOS DE UN CASO **");
+										do {
+											
+											nroMenu2=scan.nextShort();
+										}while(nroMenu2!=0);
+									break;
+									
+								case 4:
+									System.out.println("** ELIMINAR UN CASO **");
+									break;
+								
+					        }
+				}while(nroMenu2!=5);break;
+				
+					case 4:
+							System.out.println("** REPORTE FINAL **");
+							
+							break;
+				
 					
-			 default:System.out.println("ingrese correctamente la opcion");
-					break;
 			
 		}
 		
 
 	}while(scan.nextInt()!=4);
-	
-	}
-
-
-
-	public static void producir() throws FileNotFoundException {
-		String salida = "txt.csv";
-		PrintWriter oS = new PrintWriter(salida);
-	
-		for(int i=0;i<casos.size();i++){
-    	
-    		oS.println( casos.get(i).toString());
-    	
-    	}
 		
 	
-		oS.close();
-
 	}
+	public static void producir() throws FileNotFoundException {
+		String salida = "prueba.csv";
+	    
+		PrintWriter oS = new PrintWriter(salida);
+		oS.println( ","+"PACIENTES");
+		for(int i=1;i<=pacientes.size();i++){
+	    	
+			oS.println( String.valueOf( i ) + "," +pacientes.toString() );
+	    	
+	    }
+		oS.println( ","+"ENFERMEDADES");
+		for(int i=1;i<=enfermedades.size();i++){
+	    	
+	    	oS.println( String.valueOf( i ) + "," + enfermedades.toString());
+	    	
+	    }
+		oS.println( ","+"LOS CASOS");
+		for(int i=1;i<=casos.size();i++){
+	    	
+	    	oS.println( String.valueOf( i ) + "," + casos.toString() );
+	    	
+	    }
+		
+		oS.close();
+		}
+	
+
 }
