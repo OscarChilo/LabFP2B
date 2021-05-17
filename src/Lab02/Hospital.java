@@ -322,7 +322,7 @@ public class Hospital {
 															System.out.println("Ingrese observaciones (si las tiene):");
 															casos.get(pacientId).setObservacion(observacion);
 															fecha=LocalDate.now();
-															casos.get(pacientId).setFecha(fecha);
+															casos.get(pacientId).setFecha(fecha);;
 															codCaso=(dni2+String.valueOf(pacientes.get(pacientId)));
 															casos.get(pacientId).setCodCaso(codCaso);
 															break;
